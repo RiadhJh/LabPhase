@@ -76,7 +76,7 @@ const createOrder = async (req, res) => {
 
 const getAllOrders = async (req, res) => {
     try {
-        const orders = await Order.find({});
+        const orders = await Order.find({}).populate('user', 'id username');
         res.json(orders);
 
     } catch (error) {
@@ -138,7 +138,7 @@ const calculateTotalSalesByDate = async (req, res) => {
 
 const findOrderById = async (req, res) => {
     try {
-        const order = await Order.findById(req.params.id) ;
+        const order = await Order.findById(req.params.id).populate('user', 'username email');
         
         if (order) {
             res.json(order);
